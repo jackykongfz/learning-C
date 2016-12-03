@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<malloc.h>
+
+main()
+{
+	int m1, n1,m2,n2, *pf1 = NULL,*pf2=NULL,*pf3=NULL;//定义矩阵的行数列数
+	printf("please enter your first matrix's row and rank number m*n\n");
+	scanf_s("%d%*c%d", &m1, &n1);
+	pf1 = (int*)calloc(m1*n1, sizeof(int));
+	printf("please enter the data in your matrix one by one\n");
+    int i,j,k;
+	for (i = 0; i < m1*n1; i++)
+	{
+		scanf_s("%d", pf1 + i);
+	}
+
+	printf("\n");//第一个矩阵的输入
+
+	printf("please enter your second matrix's row and rank number m*n\n");
+	scanf_s("%d%*c%d", &m2, &n2);
+	pf2 = (int*)calloc(m2*n2, sizeof(int));
+	printf("please enter the data in your matrix one by one\n");
+	for (i = 0; i < m1*n1; i++)
+	{
+		scanf_s("%d", pf2 + i);
+	}
+	printf("\n");//第二个矩阵的输入
+
+	pf3 = (int*)calloc(m1*n2, sizeof(int));//定义第三个矩阵的大小
+
+	if (n1 != m2)//判断矩阵是否能相乘
+	{
+		printf("two matrix can't be multipled");
+	}
+	else
+	{
+		for (j = 0; j < m1; j++)//输出矩阵1
+		{
+			for (k = 0; k < n1; k++)
+			{
+				printf("%d\t", *(pf1 + j * n1 + k));
+			}
+			printf("\n");
+		}
+
+		for (j = 0; j < m2; j++)//输出矩阵2
+		{
+			for (k = 0; k < n2; k++)
+			{
+				printf("%d\t", *(pf2 + j * n2 + k));
+			}
+			printf("\n");
+		}
+		for (i = 0; i < m1; i++)//乘法
+		{
+			for (j = 0; j < n2; j++)
+			{			
+				int temp = 0;
+				for (k = 0; k < n1; k++)
+				{
+					temp = (*(pf1 +i*n1 + k))*(*(pf2 + j + k*n2 )) + temp;
+				}
+				*(pf3 + i*n2 + j) = temp;
+			}
+		}
+		for (j = 0; j < m1; j++)//输出矩阵3
+		{
+			for (k = 0; k < n2; k++)
+			{
+				printf("%d\t", *(pf3 + j * n2 + k));
+			}
+			printf("\n");
+		}
+	}
+}
