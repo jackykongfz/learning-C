@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+main()
+{
+	int a;
+	scanf_s("%d", &a);
+	IsPerfect(a);
+}
+
+int IsPerfect(int x)
+{
+	int count = 1;
+	for (int i = 1; i < x-1; i++)
+	{
+		for (int j = 1; j < x - 1; j++)
+		{
+			if (i*j == x)
+			{
+				count = count + j;
+			}
+		}
+	}
+	if (count == x)
+	{
+		printf("%d is a Perfect Number", x);
+	}
+	else
+	{
+		printf("%d isn't a Perfect Number", x);
+	}
+}
